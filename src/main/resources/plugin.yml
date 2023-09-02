@@ -1,0 +1,9 @@
+name: Lumania_LobbySystem
+version: '${version}'
+main: dev.ahmet.lobbysystem.LobbySystem
+api-version: '1.20'
+commands:
+  setspawn:
+  spawn:
+  build:
+  partner:

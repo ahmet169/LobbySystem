@@ -1,0 +1,29 @@
+#Plugin by 169ahmet
+#MySQL hier
+mysql:
+  host: 'localhost'
+  port: 3306
+  username: 'user'
+  password: 'password'
+  database: 'minecraft'
+broadcasts-enabled: true
+broadcast-interval: 3600 # 3 Minuten sind eingestellt
+broadcasts:
+  test:
+    sound: BLOCK_NOTE_BLOCK_PLING # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+    messages:
+      - ''
+      - '§b§lLUMANIA §8• §7 Hier kann etwas stehen'
+      - ''
+  nosound:
+    messages:
+      - ' '
+      - '§b§lLUMANIA §8• §7Besuche gerne unseren Discord, https://www.lumania.net'
+      - ' '
+
+spawnpoint:
+  x: 0
+  y: 100
+  z: 0
+  yaw: 20
+  pitch: 20
