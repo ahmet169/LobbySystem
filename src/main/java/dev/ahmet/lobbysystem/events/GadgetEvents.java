@@ -1,20 +1,15 @@
 package dev.ahmet.lobbysystem.events;
 
 import dev.ahmet.lobbysystem.LobbySystem;
-import dev.ahmet.lobbysystem.utils.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.entity.EnderPearl;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -22,7 +17,7 @@ import java.util.List;
 
 public class GadgetEvents implements Listener {
 
-    private List<Player> cooldown;
+    private final List<Player> cooldown;
 
     public GadgetEvents() {
         this.cooldown = new ArrayList<>();
@@ -46,21 +41,17 @@ public class GadgetEvents implements Listener {
                         cooldown.remove(player);
                     }
                 }, 60);
-
             }
         } else {
             event.setCancelled(true);
             player.sendMessage(LobbySystem.getPrefix() + "Bitte warte einen Moment.");
         }
-
     }
 
     @EventHandler
     public void onLaunch(ProjectileLaunchEvent event) {
         if (event.getEntity().getShooter() instanceof Player player && event.getEntity() instanceof EnderPearl) {
             if(!cooldown.contains(player)) {
-                ItemStack enderPearl = new ItemBuilder(Material.ENDER_PEARL).setAmount(1).setName("§9§lRauchgranate").toItemStack();
-                player.getInventory().setItem(5, enderPearl);
                 cooldown.add(player);
                 Bukkit.getScheduler().runTaskLater(LobbySystem.getInstance(), () -> cooldown.remove(player), 100);
             } else {
@@ -85,4 +76,6 @@ public class GadgetEvents implements Listener {
             event.setCancelled(true);
         }
     }
+
+
 }

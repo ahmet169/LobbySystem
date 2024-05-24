@@ -28,7 +28,7 @@ public class BuildCommand implements CommandExecutor {
         }
 
         if(buildList.contains(player)) {
-            player.sendMessage(prefix + "Du bist nun §cnicht mehr §7im §bBaumodus§7.");
+            player.sendMessage(prefix + "Du bist nun §cnicht mehr §7im §bBaumodus§7");
             player.setGameMode(GameMode.SURVIVAL);
             inv.clear();
             inv.setItem(1, new ItemBuilder(Material.COMPASS).setName("§a§lNavigator").toItemStack());

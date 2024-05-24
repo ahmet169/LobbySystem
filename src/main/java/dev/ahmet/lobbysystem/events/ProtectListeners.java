@@ -10,12 +10,12 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 import java.util.List;
 
@@ -57,6 +57,22 @@ public class ProtectListeners implements Listener {
     }
 
     @EventHandler
+    public void onEntityPlace(EntityPlaceEvent event) {
+        Player player = event.getPlayer();
+        if (!buildList.contains(player)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        if (!buildList.contains(player)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof AbstractArrow) {
             Projectile projectile = (Projectile) event.getDamager();
@@ -79,6 +95,21 @@ public class ProtectListeners implements Listener {
             } else {
                 event.setDamage(0);
             }
+        }
+    }
+
+    @EventHandler
+    public void onCollect(PlayerItemConsumeEvent event) {
+        Player player = event.getPlayer();
+        if (!buildList.contains(player)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityShoot(EntityShootBowEvent event) {
+        if(event.getProjectile() instanceof AbstractArrow arrow) {
+            arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
         }
     }
 

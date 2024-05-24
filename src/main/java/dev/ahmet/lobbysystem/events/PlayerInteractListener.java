@@ -59,6 +59,15 @@ public class PlayerInteractListener implements Listener {
                 playerInv.setItem(5, snowBall);
             }
 
+            if(item.getType().equals(Material.ENDER_PEARL)) {
+                ItemStack enderPearl = new ItemBuilder(Material.ENDER_PEARL).setAmount(2).setName("§9§lRauchgranate").toItemStack();
+                player.getInventory().setItem(5, enderPearl);
+            }
+
+            if(item.getType().equals(Material.FIREWORK_ROCKET)) {
+                event.setCancelled(true);
+            }
+
             if(item.getType().equals(Material.BLAZE_ROD)) {
                 if(!cooldown.contains(player)) {
                     player.addPotionEffect(PotionEffectType.LEVITATION.createEffect(80, 1).withParticles(false));
@@ -67,7 +76,6 @@ public class PlayerInteractListener implements Listener {
                 } else {
                     player.sendMessage(LobbySystem.getPrefix() + "Bitte warte einen Moment.");
                 }
-
             }
 
             if(item.getType().equals(Material.FEATHER)) {
@@ -80,6 +88,13 @@ public class PlayerInteractListener implements Listener {
                 }
             }
 
+            if(item.getType().equals(Material.BOW)) {
+                playerInv.setItem(33, new ItemBuilder(Material.ARROW).setName("").toItemStack());
+                if(!cooldown.contains(player)) {
+                    cooldown.add(player);
+                    Bukkit.getScheduler().runTaskLater(LobbySystem.getInstance(), () -> cooldown.remove(player), 100);
+                }
+            }
         }
 
     }

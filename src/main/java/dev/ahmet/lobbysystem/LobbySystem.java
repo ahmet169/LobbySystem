@@ -1,7 +1,6 @@
 package dev.ahmet.lobbysystem;
 
 import dev.ahmet.lobbysystem.commands.BuildCommand;
-import dev.ahmet.lobbysystem.commands.PartnerCommand;
 import dev.ahmet.lobbysystem.commands.SetSpawnCommand;
 import dev.ahmet.lobbysystem.commands.SpawnCommand;
 import dev.ahmet.lobbysystem.database.Database;
@@ -21,22 +20,20 @@ import java.util.*;
 public final class LobbySystem extends JavaPlugin {
 
     private static LobbySystem instance;
-    private Database database;
     private LobbyManager manager;
     private List<Player> buildList;
 
     @Override
     public void onEnable() {
         instance = this;
-        database = new Database();
-        database.createTables();
+        saveDefaultConfig();
+        new Database().createTables();
         manager = new LobbyManager();
         buildList = new ArrayList<>();
-        saveDefaultConfig();
         startBroadcastTimer(getServer().getScheduler());
         registerAll(Bukkit.getPluginManager());
 
-        getLogger().info("Lumania LobbySystem by 169ahmet");
+        getLogger().info("LobbySystem by 169ahmet");
     }
 
     public static String getPrefix() {return "§b§lLUMANIA §8• §7";}
@@ -54,7 +51,7 @@ public final class LobbySystem extends JavaPlugin {
     }
 
     private void startBroadcastTimer(BukkitScheduler scheduler) {
-        int scheduleId = scheduler.scheduleSyncDelayedTask(instance, () -> {
+        scheduler.scheduleSyncDelayedTask(instance, () -> {
             if (getConfig().getBoolean("broadcasts-enabled")) {
                 Set<String> broadcastsList = getConfig().getConfigurationSection("broadcasts").getKeys(false);
                 String broadcastId = getRandomElement(broadcastsList);
@@ -105,6 +102,5 @@ public final class LobbySystem extends JavaPlugin {
         getCommand("setspawn").setExecutor(new SetSpawnCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("build").setExecutor(new BuildCommand());
-        getCommand("partner").setExecutor(new PartnerCommand());
     }
 }

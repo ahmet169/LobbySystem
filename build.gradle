@@ -20,7 +20,6 @@ repositories {
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
-    //implementation 'com.github.stefvanschie.inventoryframework:IF:0.10.9'
     implementation 'com.zaxxer:HikariCP:5.0.1'
     compileOnly 'eu.cloudnetservice.cloudnet:driver:4.0.0-RC9'
     compileOnly 'eu.cloudnetservice.cloudnet:bridge:4.0.0-RC9'

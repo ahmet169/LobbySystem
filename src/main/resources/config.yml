@@ -1,5 +1,7 @@
 #Plugin by 169ahmet
-#MySQL hier
+
+prefix: '§8[§aLobby§8] '
+
 mysql:
   host: 'localhost'
   port: 3306
@@ -13,12 +15,12 @@ broadcasts:
     sound: BLOCK_NOTE_BLOCK_PLING # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
     messages:
       - ''
-      - '§b§lLUMANIA §8• §7 Hier kann etwas stehen'
+      - 'Hier kann etwas stehen'
       - ''
   nosound:
     messages:
       - ' '
-      - '§b§lLUMANIA §8• §7Besuche gerne unseren Discord, https://www.lumania.net'
+      - '§7Besuche gerne unseren Discord, https://www.lumania.net'
       - ' '
 
 spawnpoint:
